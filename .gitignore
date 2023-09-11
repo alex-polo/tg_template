@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+logs/
+venv/
+__pycache__/
+.idea/
+*.py[cod]
+*.sh
+*.bat
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
