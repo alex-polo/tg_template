@@ -1,5 +1,6 @@
 filename = 'bot.log'
 directory = 'logs'
-
-
-#Кое-кому надо бы купить резиновую женщину!
+logger_level = 'DEBUG'
+logger_format = '{time:YYYY-MM-DD HH:mm:ss} | {level} | {name} | file:{file} | line:{line} - {message}'
+logger_rotation = '300 MB'
+logger_compression = 'zip'

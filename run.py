@@ -1,5 +1,8 @@
-import logging
-import os.path
+import os
+import sys
+import traceback
+
+from loguru import logger
 
 from config import (
     LoggerConfig,
@@ -13,16 +16,31 @@ def config_logger(config: LoggerConfig) -> None:
     :param config: LoggerConfig
     :return: None
     """
-    if not os.path.exists(config.directory):
-        os.mkdir(config.directory)
+    logger.remove()
 
-    # logging.basicConfig()
+    logger.add(
+        # console
+        sink=sys.stderr,
+        level=config.logger_level,
+        format=config.logger_format
+    )
+
+    logger.add(
+        sink=os.path.join(config.logger_directory, config.logger_filename),
+        level=config.logger_level,
+        format=config.logger_format,
+        rotation=config.logger_rotation,
+        compression=config.logger_compression
+    )
 
 
 if __name__ == '__main__':
     try:
         config_logger(config=get_logger_config())
+        logger.info('Poehyli! @Gagarin')
     except KeyboardInterrupt as interrupt:
-        print(interrupt)
+        logger.error(interrupt)
     except Exception as error:
-        print(error)
+        logger.error(error)
+        # смотрим ошибки
+        logger.error(traceback.format_exc(limit=None, chain=True))
