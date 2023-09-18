@@ -6,7 +6,7 @@ from loguru import logger
 
 from config import (
     LoggerConfig,
-    get_logger_config
+    get_logger_config, get_database_config
 )
 
 
@@ -38,6 +38,7 @@ if __name__ == '__main__':
     try:
         config_logger(config=get_logger_config())
         logger.info('Poehyli! @Gagarin')
+        # print(get_database_config())
     except KeyboardInterrupt as interrupt:
         logger.error(interrupt)
     except Exception as error:

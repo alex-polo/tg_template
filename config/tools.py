@@ -1,4 +1,8 @@
-from config import LoggerConfig
+import os
+
+from environs import Env
+
+from config.classes import LoggerConfig, DataBaseConfig
 from config.logging import (
     filename,
     directory,
@@ -17,4 +21,17 @@ def get_logger_config() -> LoggerConfig:
         logger_level=logger_level,
         logger_rotation=logger_rotation,
         logger_compression=logger_compression
+    )
+
+
+def get_database_config() -> DataBaseConfig:
+    env = Env()
+    env.read_env(os.path.join(os.getcwd(), '.env'))
+
+    return DataBaseConfig(
+        db_user=env.str('DB_USER'),
+        db_pass=env.str('DB_PASS'),
+        db_host=env.str('DB_HOST'),
+        db_port=env.str('DB_PORT'),
+        db_name=env.str('DB_NAME'),
     )

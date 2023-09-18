@@ -14,3 +14,12 @@ class LoggerConfig:
 @dataclass
 class TgBotConfig:
     token: str
+
+
+@dataclass
+class DataBaseConfig:
+    db_user: str
+    db_pass: str
+    db_name: str
+    db_host: str
+    db_port: str
