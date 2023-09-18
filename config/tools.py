@@ -2,7 +2,7 @@ import os
 
 from environs import Env
 
-from config.classes import LoggerConfig, DataBaseConfig
+from config.classes import LoggerConfig, DataBaseConfig, TgBotConfig
 from config.logging import (
     filename,
     directory,
@@ -21,6 +21,18 @@ def get_logger_config() -> LoggerConfig:
         logger_level=logger_level,
         logger_rotation=logger_rotation,
         logger_compression=logger_compression
+    )
+
+
+def get_tg_bot_config() -> TgBotConfig:
+    env = Env()
+    env.read_env(os.path.join(os.getcwd(), '.env'))
+
+    return TgBotConfig(
+        token=env.str('TOKEN'),
+        admin_ids=env.str('ADMIN_IDS').split(','),
+        error_chanel_id=env.str('ERROR_CHANEL_ID').split(','),
+        chanel_id=env.str('CHANEL_ID').split(','),
     )
 
 

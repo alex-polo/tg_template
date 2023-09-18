@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -14,6 +15,9 @@ class LoggerConfig:
 @dataclass
 class TgBotConfig:
     token: str
+    admin_ids: List[str]
+    error_chanel_id: List[str]
+    chanel_id: List[str]
 
 
 @dataclass
